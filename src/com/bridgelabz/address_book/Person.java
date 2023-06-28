@@ -4,84 +4,40 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Person {
-    ArrayList<Contact> contactList = new ArrayList<>();
-    Contact obj = new Contact();
-    void addContact(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the first name: ");
-        obj.setFirstName(sc.next());
+    private ArrayList<Contact> contactsList = new ArrayList<>();
 
-        System.out.println("Enter the last name: ");
-        obj.setLastName(sc.next());
+    public void addContact(Contact contact)
+    {
+        contactsList.add(contact);
+    }
+    public void deleteContact(String name) {
+        for (Contact contact : contactsList) {
+            if (contact.getFirstName().equals(name)) {
+                contactsList.remove(contact);
 
-        System.out.println("Enter address: ");
-        obj.setAddress(sc.next());
-
-        System.out.println("Enter city name: ");
-        obj.setCity(sc.next());
-
-        System.out.println("Enter state name: ");
-        obj.setState(sc.next());
-
-        System.out.println("Enter your postal code: ");
-        obj.setZip(sc.nextInt());
-
-        System.out.println("Enter contact number: ");
-        obj.setPhoneNumber(sc.nextLong());
-
-        System.out.println("Enter your email id: ");
-        obj.setEmail(sc.next());
-
-        contactList.add(obj);
-        System.out.println(contactList);
-
-        System.out.println("Choose a option to edit: ");
-        System.out.println("1: Edit name: ");
-        System.out.println("2: Edit address: ");
-        System.out.println("3: Edit city name: ");
-        System.out.println("4: Edit state name: ");
-        System.out.println("5: Edit your postal code: ");
-        System.out.println("6: Edit your contact number: ");
-        System.out.println("7: Edit your email: " );
-
-        int option = sc.nextInt();
-        switch (option){
-            case 1:
-                System.out.println("first name: ");
-                obj.setFirstName(sc.next());
-                System.out.println("last name:");
-                obj.setLastName(sc.next());
-                break;
-            case 2:
-                System.out.println("Enter address: ");
-                obj.setAddress(sc.next());
-                break;
-            case 3:
-                System.out.println("Enter city name: ");
-                obj.setCity(sc.next());
-                break;
-            case 4:
-                System.out.println("Enter state name: ");
-                obj.setState(sc.next());
-                break;
-            case 5:
-                System.out.println("Enter postal cade: ");
-                obj.setPhoneNumber(sc.nextLong());
-                break;
-            case 6:
-                System.out.println("Enter contact number: ");
-                obj.setPhoneNumber(sc.nextLong());
-                break;
-            case 7:
-                System.out.println("Enter your email id: ");
-                obj.setEmail(sc.next());
-            default:
-                System.out.println("Choose correct option: ");
+                System.out.println("Contact deleted: " + name);
+                return;
+            }
         }
-
-        contactList.add(obj);
-        System.out.println(contactList);
-
+        System.out.println("Contact not found: " + name);
     }
 
+    public void displayContacts() {
+        if (contactsList.isEmpty()) {
+            System.out.println("Address book is empty.");
+        } else {
+            System.out.println("Address book contacts:");
+            for (Contact contact : contactsList) {
+                System.out.println("First Name: " + contact.getFirstName());
+                System.out.println("Last Name: " + contact.getLastName());
+                System.out.println("Address: " + contact.getAddress());
+                System.out.println("City Name: " + contact.getCity());
+                System.out.println("State Name: " + contact.getState());
+                System.out.println("Zip code: " + contact.getZip());
+                System.out.println("Phone Number: " + contact.getPhoneNumber());
+                System.out.println("Email: " + contact.getEmail());
+                System.out.println("-----------------------------");
+            }
+        }
+    }
 }
